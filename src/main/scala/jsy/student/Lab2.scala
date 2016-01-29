@@ -79,7 +79,6 @@ object Lab2 extends jsy.util.JsyApplication {
       case N(n) => {if(n == 0 | n.isNaN()) false else true}
       case S(s) => if( s == "" ) false else true
       case Undefined => false
-      case _ => throw new UnsupportedOperationException
     }
   }
 
@@ -90,7 +89,6 @@ object Lab2 extends jsy.util.JsyApplication {
       case Undefined => "undefined"
       case N(n) => n.toString
       case B(b) => b.toString
-      case _ => ???
     }
   }
 
@@ -99,9 +97,34 @@ object Lab2 extends jsy.util.JsyApplication {
     def eToVal(e: Expr): Expr = eval(env, e)
 
     e match {
-      /* Base Cases */
-
-      /* Inductive Cases */
+	  case Unary(Neg, e) => N((0-toNumber(eToVal(e))))
+	  case Unary(Not, e) => B((!toBoolean(eToVal(e))))
+	  case Binary(bop, e1, e2) => {
+	  bop match{
+		  case Plus =>{
+			  (e1,e2) match {
+				  case (S(_),_)|(_,S(_)) => {
+					  S(toStr(eToVal(e1)) + toStr(eToVal(e2)))
+					  }
+				  case (_,_) => {
+					  N(toNumber(eToVal(e1)) + toNumber(eToVal(e2)))
+					}
+				  }
+		  }/*
+		  case Minus =>{
+			  
+		  }
+		  case Times =>{
+		  }
+		  case Div => {
+		  }
+		  case Eq => {
+			  
+		  }
+		  case Ne => {
+		  }*/
+		}
+	  }
       case Print(e1) => println(pretty(eToVal(e1))); Undefined
 
       case _ => ???
