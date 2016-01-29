@@ -76,7 +76,10 @@ object Lab2 extends jsy.util.JsyApplication {
     require(isValue(v))
     (v: @unchecked) match {
       case B(b) => b
-      case _ => ???
+      case N(n) => {if(n == 0 | n.isNaN()) false else true}
+      case S(s) => if( s == "" ) false else true
+      case Undefined => false
+      case _ => throw new UnsupportedOperationException
     }
   }
 
@@ -85,6 +88,8 @@ object Lab2 extends jsy.util.JsyApplication {
     (v: @unchecked) match {
       case S(s) => s
       case Undefined => "undefined"
+      case N(n) => n.toString
+      case B(b) => b.toString
       case _ => ???
     }
   }
