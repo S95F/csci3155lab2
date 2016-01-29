@@ -22,8 +22,10 @@ class ToSpec extends FlatSpec{
     val d = N(1.0)
     assert(toNumber(d) === 1.0)
   }
-  "toNumber" should "return " in{
-    // not defined yet for strings
+  "toNumber" should "return NaN with strings or undefined inputs" in{
+    val string = S("stringsly")
+    assert(toNumber(string) === Double.NaN)
+    
   }
 
 }
