@@ -6,7 +6,7 @@ object Lab2 extends jsy.util.JsyApplication {
 
   /*
    * CSCI 3155: Lab 2
-   * <Steven Funk>
+   * <stfu2360>
    * 
    * Partner: <Alicia>
    * Collaborators: <Any Collaborators>
@@ -110,19 +110,95 @@ object Lab2 extends jsy.util.JsyApplication {
 					  N(toNumber(eToVal(e1)) + toNumber(eToVal(e2)))
 					}
 				  }
-		  }/*
+		  }
 		  case Minus =>{
-			  
+			 (e1,e2) match {
+				 case (S(_), _){
+					 S(toStr(eToVal(e1)) - toStr(eToVal(e2)))
+					 }
+				 case (_,_){
+					 N(toNumber(eToVal(e1)) - toNumber(eToVal(e2)))
+					 }
+				 } 
 		  }
 		  case Times =>{
+			  N(toNumber(eToVal(e1)) * toNumber(eToVal(e2)))
 		  }
 		  case Div => {
+			  N(toNumber(eToVal(e1)) / toNumber(eToVal(e2)))
 		  }
 		  case Eq => {
-			  
+			  (e1, e2) match{
+				  case ( Undefined , _ ) | ( _ , Undefined ) => {
+						  B(false)
+						  }
+				  case (_, _) => {
+						  B((toString(eToVal(e1)).equals(toString(eToVal(e2)))))
+				  }
+			}
 		  }
 		  case Ne => {
-		  }*/
+			  (e1, e2) match{
+				  case ( Undefined , _ ) | ( _ , Undefined ) => {
+						  B(false)
+						  }
+				  case (_, _) => {
+						  B(!(toString(eToVal(e1)).equals(toString(eToVal(e2)))))
+				  }
+			}
+		  }
+		  case Lt => {
+			  (e1, e2) match{
+				  case ( Undefined , _ ) | ( _ , Undefined ) => {
+					  B(false)
+					  }
+				  case (S(e1),S(e2)) => {
+					  B(toString(eToVal(e1)).length() < toString(eToVal(e2)).length())
+					  }
+				  case (_,_) => {
+					  B(toNumber(eToVal(e1)) < toNumber(eToVal(e2)))
+					  }
+				  }
+			  }
+		  case Le => {
+			  (e1, e2) match{
+				  case ( Undefined , _ ) | ( _ , Undefined ) => {
+					  B(false)
+					  }
+				  case (S(e1),S(e2)) => {
+					  B(toString(eToVal(e1)).length() <= toString(eToVal(e2)).length())
+					  }
+				  case (_,_) => {
+					  B(toNumber(eToVal(e1)) <= toNumber(eToVal(e2)))
+					  }
+				  }
+			  }
+		  case Gt => {
+			  (e1, e2) match{
+				  case ( Undefined , _ ) | ( _ , Undefined ) => {
+					  B(false)
+					  }
+				  case (S(e1),S(e2)) => {
+					  B(toString(eToVal(e1)).length() > toString(eToVal(e2)).length())
+					  }
+				  case (_,_) => {
+					  B(toNumber(eToVal(e1)) > toNumber(eToVal(e2)))
+					  }
+				  }
+			  }
+		  case Ge => {
+			  (e1, e2) match{
+				  case ( Undefined , _ ) | ( _ , Undefined ) => {
+					  B(false)
+					  }
+				  case (S(e1),S(e2)) => {
+					  B(toString(eToVal(e1)).length() >= toString(eToVal(e2)).length())
+					  }
+				  case (_,_) => {
+					  B(toNumber(eToVal(e1)) >= toNumber(eToVal(e2)))
+					  }
+				  }
+			  }
 		}
 	  }
       case Print(e1) => println(pretty(eToVal(e1))); Undefined
